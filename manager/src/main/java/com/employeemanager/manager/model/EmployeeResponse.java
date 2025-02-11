@@ -8,6 +8,7 @@ import java.util.List;
 public class EmployeeResponse {
 
     private String status;
+    private Employee datas;
     private List<Employee> data;
     private String message;
 

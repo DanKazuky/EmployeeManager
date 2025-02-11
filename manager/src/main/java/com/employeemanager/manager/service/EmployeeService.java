@@ -19,7 +19,7 @@ public class EmployeeService {
         return employeeClient.getAllEmployees();
     }
 
-    public List<Employee> getEmployeeById(int id) {
+    public Employee getEmployeeById(int id) {
         return employeeClient.getEmployeeById(id);
     }
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -33,10 +34,11 @@ public class EmployeeClient {
         return response.getData();
     }
 
-    public List<Employee> getEmployeeById(int id) {
+    public Employee getEmployeeById(int id) {
         String url = baseUrl + "/employee/" + id;
-        EmployeeResponse response = restTemplate.exchange(url, HttpMethod.GET, entity, EmployeeResponse.class).getBody();
-        return response.getData();
+        ResponseEntity<EmployeeResponse> response = restTemplate.exchange(url, org.springframework.http.HttpMethod.GET, entity, EmployeeResponse.class);
+
+        return response.getBody().getDatas();
     }
 
 }
