@@ -13,12 +13,18 @@ export default function EmployeeLookup() {
       const url = employeeId
         ? `http://localhost:8080/api/employees/${employeeId}`
         : `http://localhost:8080/api/employees`;
-      
+
       const response = await fetch(url);
       if (!response.ok) throw new Error("Error al obtener los datos");
       const data = await response.json();
-      
-      setEmployees(Array.isArray(data) ? data : [data]);
+
+      console.log("Datos recibidos:", data);
+
+      if (employeeId) {
+        setEmployees([data.data]);
+      } else {
+        setEmployees(data.data || data);
+      }
     } catch (err) {
       setError(err.message);
       setEmployees([]);
@@ -45,9 +51,9 @@ export default function EmployeeLookup() {
         {employees.map((emp) => (
           <div key={emp.id} style={{ padding: "10px", border: "1px solid #ab49cc", borderRadius: "4px", marginBottom: "10px", backgroundColor: "#636363" }}>
             <p><strong>ID:</strong> {emp.id}</p>
-            <p><strong>Nombre:</strong> {emp.name}</p>
-            <p><strong>Salario:</strong> ${emp.salary}</p>
-            <p><strong>Edad:</strong> {emp.age}</p>
+            <p><strong>Nombre:</strong> {emp.employee_name}</p>
+            <p><strong>Salario:</strong> ${emp.employee_salary}</p>
+            <p><strong>Edad:</strong> {emp.employee_age}</p>
           </div>
         ))}
       </div>
